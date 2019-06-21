@@ -58,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     // create a listener to this newly created animation
     animationController.addListener(() {
       setState(() {
+        // triggers setState every time the animation value updates
       });
     });
 
