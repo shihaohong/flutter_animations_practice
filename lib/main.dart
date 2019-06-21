@@ -25,7 +25,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-  bool continueAnimation = true;
+  bool isRunningAnimation = true;
   Animation<double> sizeAnimation;
   Animation<Color> colorAnimation;
   AnimationController animationController;
@@ -63,14 +63,14 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     });
 
     // starts the [Animation] of animationController
-    start();
+    startAnimation();
   }
 
-  void start() {
+  void startAnimation() {
     if (animationController.status == AnimationStatus.reverse) {
       animationController.reverse()
         .then((_) {
-          start();
+          startAnimation();
         });
     } else {
       animationController.forward()
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           return animationController.reverse();
         })
         .then((_) {
-          start();
+          startAnimation();
         });
     }
   }
@@ -116,10 +116,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             OutlineButton(
               onPressed: () {
                 setState(() {
-                  continueAnimation = !continueAnimation;
-                  if (continueAnimation) {
-                    start();
-                  } else if (!continueAnimation) {
+                  isRunningAnimation = !isRunningAnimation;
+                  if (isRunningAnimation) {
+                    startAnimation();
+                  } else if (!isRunningAnimation) {
                     animationController.stop();
                   }
                 });
